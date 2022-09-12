@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class PersonDAO {
@@ -26,12 +27,20 @@ public class PersonDAO {
                         new BeanPropertyRowMapper<>(Person.class));
     }
 
-    public Person show(final int id) {
+    public Optional<Person> show(final int id) {
         return jdbcTemplate.
                 query("SELECT * FROM person WHERE id=?",
                         new Object[]{id},
                         new BeanPropertyRowMapper<>(Person.class))
-                .stream().findAny().orElse(null);
+                .stream().findAny();
+    }
+
+    public Optional<Person> show(final String email) {
+        return jdbcTemplate.
+                query("SELECT * FROM person WHERE email=?",
+                        new Object[]{email},
+                        new BeanPropertyRowMapper<>(Person.class))
+                .stream().findAny();
     }
 
     public void save(Person person) {
