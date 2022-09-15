@@ -44,13 +44,13 @@ public class PersonDAO {
     }
 
     public void save(Person person) {
-        jdbcTemplate.update("INSERT INTO person(name, age, email) VALUES(?, ?, ?)",
-                person.getName(), person.getAge(), person.getEmail());
+        jdbcTemplate.update("INSERT INTO person(name, age, email, address) VALUES(?, ?, ?, ?)",
+                person.getName(), person.getAge(), person.getEmail(), person.getAddress());
     }
 
     public void update(int id, Person person) {
-        jdbcTemplate.update("UPDATE person SET name=?, age=?, email=? WHERE id=?",
-                person.getName(), person.getAge(), person.getEmail(), id);
+        jdbcTemplate.update("UPDATE person SET name=?, age=?, email=?, address=? WHERE id=?",
+                person.getName(), person.getAge(), person.getEmail(), person.getAddress(), id);
     }
 
     public void delete(int id) {
@@ -60,20 +60,21 @@ public class PersonDAO {
     public void testMultipleUpdate() {
         long start = System.currentTimeMillis();
         for (int i = 0; i < 1000; i++) {
-            jdbcTemplate.update("INSERT INTO person(name, age, email) VALUES (?, ?, ?)",
-                    "Tom" + i, 30, "hardy" + i + "mail.com");
+            jdbcTemplate.update("INSERT INTO person(name, age, email, address) VALUES (?, ?, ?, ?)",
+                    "Tom" + i, 30, "hardy" + i + "mail.com", "address " + i);
         }
         System.out.println("time: " + (System.currentTimeMillis() - start));
     }
 
     public void testBatchUpdate() {
         long start = System.currentTimeMillis();
-        jdbcTemplate.batchUpdate("INSERT INTO person(name, age, email) VALUES (?, ?, ?)", new BatchPreparedStatementSetter() {
+        jdbcTemplate.batchUpdate("INSERT INTO person(name, age, email, address) VALUES (?, ?, ?, ?)", new BatchPreparedStatementSetter() {
             @Override
             public void setValues(PreparedStatement ps, int i) throws SQLException {
                 ps.setString(1, "Ratmir" + i);
                 ps.setInt(2, 32);
                 ps.setString(3, "ratmir" + i + "mail.ru");
+                ps.setString(4, "address " + i);
             }
 
             @Override
