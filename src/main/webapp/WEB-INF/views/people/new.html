@@ -8,19 +8,19 @@
 <form th:method="POST" th:action="@{/people}" th:object="${person}">
     <label for="name">Enter name: </label>
     <input type="text" th:field="*{name}" id="name">
-    <h1 style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">ERROR NAME</h1>
+    <h3 style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">ERROR NAME</h3>
     <br/>
     <label for="age">Enter age: </label>
     <input type="text" th:field="*{age}" id="age">
-    <h1 style="color: red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">ERROR AGE</h1>
+    <h3 style="color: red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">ERROR AGE</h3>
     <br/>
     <label for="email">Enter email: </label>
     <input type="text" th:field="*{email}" id="email">
-    <h1 style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">ERROR EMAIL</h1>
+    <h3 style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">ERROR EMAIL</h3>
     <br/>
     <label for="address">Enter address: </label>
     <input type="text" th:field="*{address}" id="address">
-    <h1 style="color: red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}">ERROR ADDRESS</h1>
+    <h3 style="color: red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}">ERROR ADDRESS</h3>
     <br/>
     <input type="submit" value="Create!">
 </form>
