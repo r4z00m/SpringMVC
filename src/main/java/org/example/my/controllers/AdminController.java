@@ -1,7 +1,7 @@
-package org.example.controllers;
+package org.example.my.controllers;
 
-import org.example.dao.PersonDAO;
-import org.example.models.Person;
+import org.example.my.dao.PersonDAO;
+import org.example.my.models.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

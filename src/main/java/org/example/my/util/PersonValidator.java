@@ -1,7 +1,7 @@
-package org.example.util;
+package org.example.my.util;
 
-import org.example.dao.PersonDAO;
-import org.example.models.Person;
+import org.example.my.dao.PersonDAO;
+import org.example.my.models.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;

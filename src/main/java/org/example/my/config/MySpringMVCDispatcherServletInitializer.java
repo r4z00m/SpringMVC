@@ -1,4 +1,4 @@
-package org.example.config;
+package org.example.my.config;
 
 import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;

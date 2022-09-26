@@ -1,8 +1,8 @@
-package org.example.controllers;
+package org.example.my.controllers;
 
-import org.example.dao.PersonDAO;
-import org.example.models.Person;
-import org.example.util.PersonValidator;
+import org.example.my.dao.PersonDAO;
+import org.example.my.models.Person;
+import org.example.my.util.PersonValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/people")
@@ -32,7 +33,12 @@ public class PeopleController {
 
     @GetMapping("/{id}")
     public String show(@PathVariable("id") int id, Model model) {
-        model.addAttribute("person", personDAO.show(id).get());
+        Optional<Person> optional = personDAO.show(id);
+        if (optional.isPresent()) {
+            model.addAttribute("person", optional.get());
+        } else {
+            return "redirect:/people";
+        }
         return "people/show";
     }
 
