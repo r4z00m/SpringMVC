@@ -60,7 +60,12 @@ public class PeopleController {
 
     @GetMapping("/{id}/edit")
     public String edit(Model model, @PathVariable("id") int id) {
-        model.addAttribute("person", personDAO.show(id).get());
+        Optional<Person> optional = personDAO.show(id);
+        if (optional.isPresent()) {
+            model.addAttribute("person", optional.get());
+        } else {
+            return "redirect:/people";
+        }
         return "people/edit";
     }
 
@@ -68,7 +73,6 @@ public class PeopleController {
     public String update(@ModelAttribute("person") @Valid Person person,
                          BindingResult bindingResult,
                          @PathVariable("id") int id) {
-        personValidator.validate(person, bindingResult);
         if (bindingResult.hasErrors()) {
             return "people/edit";
         }
