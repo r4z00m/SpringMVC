@@ -72,7 +72,7 @@ public class PersonDAO {
                 .get(Person.class, id);
         personToUpdate.setName(person.getName());
         personToUpdate.setAge(person.getAge());
-        personToUpdate.setEmail(person.getEmail());
+//        personToUpdate.setEmail(person.getEmail());
         personToUpdate.setAddress(person.getAddress());
     }
 
