@@ -1,7 +1,7 @@
 package org.example.my.util;
 
-import org.example.my.dao.PersonDAO;
 import org.example.my.models.Person;
+import org.example.my.repositories.PeopleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -10,11 +10,11 @@ import org.springframework.validation.Validator;
 @Component
 public class PersonValidator implements Validator {
 
-    private final PersonDAO personDAO;
+    private final PeopleRepository peopleRepository;
 
     @Autowired
-    public PersonValidator(PersonDAO personDAO) {
-        this.personDAO = personDAO;
+    public PersonValidator(PeopleRepository peopleRepository) {
+        this.peopleRepository = peopleRepository;
     }
 
     @Override
@@ -25,7 +25,7 @@ public class PersonValidator implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         Person person = (Person) target;
-        if (personDAO.show(person.getEmail()).isPresent()) {
+        if (peopleRepository.existsByEmail(person.getEmail())) {
             errors.rejectValue("email", "", "This email is already taken");
         }
     }

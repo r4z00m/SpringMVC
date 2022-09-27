@@ -1,7 +1,7 @@
 package org.example.my.controllers;
 
-import org.example.my.dao.PersonDAO;
 import org.example.my.models.Person;
+import org.example.my.repositories.PeopleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,16 +13,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-    private final PersonDAO personDAO;
+    private final PeopleRepository peopleRepository;
 
     @Autowired
-    public AdminController(PersonDAO personDAO) {
-        this.personDAO = personDAO;
+    public AdminController(PeopleRepository peopleRepository) {
+        this.peopleRepository = peopleRepository;
     }
 
     @GetMapping()
     public String adminPage(Model model, @ModelAttribute("person") Person person) {
-        model.addAttribute("people", personDAO.index());
+        model.addAttribute("people", peopleRepository.findAll());
         return "adminPage";
     }
 
