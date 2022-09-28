@@ -1,6 +1,7 @@
 package org.example.my.controllers;
 
 import org.example.my.models.Person;
+import org.example.my.services.ItemService;
 import org.example.my.services.PeopleService;
 import org.example.my.util.PersonValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,17 +17,25 @@ import javax.validation.Valid;
 public class PeopleController {
 
     private final PeopleService peopleService;
+    private final ItemService itemService;
     private final PersonValidator personValidator;
 
     @Autowired
-    public PeopleController(PeopleService peopleService, PersonValidator personValidator) {
+    public PeopleController(PeopleService peopleService, ItemService itemService, PersonValidator personValidator) {
         this.peopleService = peopleService;
+        this.itemService = itemService;
         this.personValidator = personValidator;
     }
 
     @GetMapping()
     public String index(Model model) {
         model.addAttribute("people", peopleService.findAll());
+
+        itemService.findByItemName("Macbook");
+        itemService.findByPerson(peopleService.findAll().get(1));
+
+        peopleService.test();
+
         return "people/index";
     }
 

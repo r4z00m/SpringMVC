@@ -29,6 +29,10 @@ public class PeopleService {
         return optional.orElse(null);
     }
 
+    public Person findByName(String name) {
+        return peopleRepository.findByName(name);
+    }
+
     @Transactional
     public void save(Person person) {
         peopleRepository.save(person);
@@ -43,5 +47,9 @@ public class PeopleService {
     @Transactional
     public void delete(int id) {
         peopleRepository.deleteById(id);
+    }
+
+    public void test() {
+        System.out.println("Testing. Inside Hibernate transaction");
     }
 }

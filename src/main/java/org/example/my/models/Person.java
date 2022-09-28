@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.util.List;
 
 @Entity
 @Table(name = "person")
@@ -36,6 +37,9 @@ public class Person {
             message = "Your address should be in that form: Country, City, Code(6 digits)")
     @Column(name = "address")
     private String address;
+
+    @OneToMany(mappedBy = "person")
+    private List<Item> items;
 
     public Person(String name, int age, String email, String address) {
         this.name = name;
