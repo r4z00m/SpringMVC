@@ -3,6 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>New Person</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script>
+        $(function() {
+            $("#datepicker").datepicker({
+                dateFormat: "dd/mm/yy"
+            });
+        });
+    </script>
 </head>
 <body>
 <form th:method="POST" th:action="@{/people}" th:object="${person}">
@@ -21,6 +32,10 @@
     <label for="address">Enter address: </label>
     <input type="text" th:field="*{address}" id="address">
     <h3 style="color: red" th:if="${#fields.hasErrors('address')}" th:errors="*{address}">ERROR ADDRESS</h3>
+    <br/>
+    <label for="datepicker">Enter date of birth (dd/MM/yyyy): </label>
+    <input type="text" th:field="*{dateOfBirth}" id="datepicker" autocomplete="off">
+    <h3 style="color: red" th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}">ERROR BIRTH</h3>
     <br/>
     <input type="submit" value="Create!">
 </form>

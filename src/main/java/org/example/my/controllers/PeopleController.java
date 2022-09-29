@@ -30,12 +30,6 @@ public class PeopleController {
     @GetMapping()
     public String index(Model model) {
         model.addAttribute("people", peopleService.findAll());
-
-        itemService.findByItemName("Macbook");
-        itemService.findByPerson(peopleService.findAll().get(1));
-
-        peopleService.test();
-
         return "people/index";
     }
 

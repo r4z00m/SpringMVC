@@ -28,5 +28,8 @@ public class PersonValidator implements Validator {
         if (peopleRepository.existsByEmail(person.getEmail())) {
             errors.rejectValue("email", "", "This email is already taken");
         }
+        if (person.getDateOfBirth() == null) {
+            errors.rejectValue("dateOfBirth", "", "Enter valid date! (dd/MM/yyyy)");
+        }
     }
 }
