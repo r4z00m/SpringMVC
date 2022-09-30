@@ -52,6 +52,9 @@ public class Person {
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
 
+    @Enumerated(EnumType.STRING)
+    private Mood mood;
+
     public Person(String name, int age, String email, String address) {
         this.name = name;
         this.age = age;

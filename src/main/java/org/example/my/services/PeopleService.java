@@ -1,5 +1,6 @@
 package org.example.my.services;
 
+import org.example.my.models.Mood;
 import org.example.my.models.Person;
 import org.example.my.repositories.PeopleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 @Service
 @Transactional(readOnly = true)
@@ -37,6 +39,7 @@ public class PeopleService {
     @Transactional
     public void save(Person person) {
         person.setCreatedAt(new Date());
+        person.setMood(Mood.values()[new Random().nextInt(Mood.values().length)]);
         peopleRepository.save(person);
     }
 
