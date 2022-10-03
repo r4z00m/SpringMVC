@@ -1,5 +1,6 @@
 package org.example.my.controllers;
 
+import org.example.my.dao.PersonDAO;
 import org.example.my.models.Person;
 import org.example.my.services.ItemService;
 import org.example.my.services.PeopleService;
@@ -19,16 +20,19 @@ public class PeopleController {
     private final PeopleService peopleService;
     private final ItemService itemService;
     private final PersonValidator personValidator;
+    private final PersonDAO personDAO;
 
     @Autowired
-    public PeopleController(PeopleService peopleService, ItemService itemService, PersonValidator personValidator) {
+    public PeopleController(PeopleService peopleService, ItemService itemService, PersonValidator personValidator, PersonDAO personDAO) {
         this.peopleService = peopleService;
         this.itemService = itemService;
         this.personValidator = personValidator;
+        this.personDAO = personDAO;
     }
 
     @GetMapping()
     public String index(Model model) {
+//        personDAO.testN2();
         model.addAttribute("people", peopleService.findAll());
         return "people/index";
     }

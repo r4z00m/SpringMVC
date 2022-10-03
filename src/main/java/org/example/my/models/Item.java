@@ -3,6 +3,7 @@ package org.example.my.models;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -11,6 +12,7 @@ import javax.validation.constraints.NotEmpty;
 @Table(name = "item")
 @Getter
 @Setter
+@ToString(exclude = "person")
 @NoArgsConstructor
 public class Item {
     @Id
